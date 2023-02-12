@@ -2,6 +2,7 @@ package com.manju.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,4 +58,12 @@ public class CustomerController {
             final Customer updatedCustomer = customerService.addCustomer(c);
             return ResponseEntity.ok(updatedCustomer);
 	}
+	
+	@DeleteMapping("/customers/{id}")
+    public ResponseEntity< Customer> deleteCustomer(@PathVariable(value = "id") Long customerId) throws ResourceNotFoundException {
+		
+		Customer c = customerService.deleteCustomer(customerId);
+		
+        return ResponseEntity.ok(c);
+    }
 }
