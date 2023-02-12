@@ -12,13 +12,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
+
 @Entity
 @Table(name = "customer")
 public class Customer {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private int id;
 	
 	@Column(name = "name")
 	private String name;
@@ -27,7 +29,7 @@ public class Customer {
 	private String email;
 
 	@OneToMany(targetEntity = Product.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "cp_fk", referencedColumnName = "id")
+	@JoinColumn(name = "c_id", referencedColumnName = "id")
 	private List<Product> products;
 	
 	
@@ -44,7 +46,7 @@ public class Customer {
 
 
 
-	public Customer(long id, String name, String email, List<Product> products) {
+	public Customer(int id, String name, String email, List<Product> products) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -70,7 +72,7 @@ public class Customer {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

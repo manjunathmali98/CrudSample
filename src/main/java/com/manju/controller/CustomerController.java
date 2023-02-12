@@ -41,7 +41,7 @@ public class CustomerController {
 	}
 
 	@GetMapping("/customers/{id}")
-	public ResponseEntity<Customer> getEmployeeById(@PathVariable(value = "id") Long customerId)
+	public ResponseEntity<Customer> getEmployeeById(@PathVariable(value = "id") Integer customerId)
 			throws ResourceNotFoundException {
 		Customer c = customerService.getCustomer(customerId);
 
@@ -49,19 +49,19 @@ public class CustomerController {
 	}
 
 	@PutMapping("/customers/{id}")
-	public ResponseEntity<Customer> updateCustomer(@PathVariable(value = "id") Long customerId,
+	public ResponseEntity<Customer> updateCustomer(@PathVariable(value = "id") Integer customerId,
 			@Valid @RequestBody Customer customerDetails) throws ResourceNotFoundException {
 		Customer c = customerService.getCustomer(customerId);
 
 		c.setEmail(customerDetails.getEmail());
 		c.setName(customerDetails.getName());
-
+		c.setProducts(customerDetails.getProducts());
 		final Customer updatedCustomer = customerService.addCustomer(c);
 		return ResponseEntity.ok(updatedCustomer);
 	}
 
 	@DeleteMapping("/customers/{id}")
-	public ResponseEntity<Customer> deleteCustomer(@PathVariable(value = "id") Long customerId)
+	public ResponseEntity<Customer> deleteCustomer(@PathVariable(value = "id") Integer customerId)
 			throws ResourceNotFoundException {
 
 		Customer c = customerService.deleteCustomer(customerId);

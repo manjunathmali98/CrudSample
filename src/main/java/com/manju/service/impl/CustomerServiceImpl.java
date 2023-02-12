@@ -4,12 +4,14 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.manju.entity.Customer;
 import com.manju.exception.ResourceNotFoundException;
 import com.manju.respository.CustomerRepository;
 import com.manju.service.CustomerService;
 
+@Service
 public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
@@ -32,7 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer getCustomer(Long customerId) throws ResourceNotFoundException {
+	public Customer getCustomer(Integer customerId) throws ResourceNotFoundException {
 
 		Customer c = customerRepository.findById(customerId)
 									   .orElseThrow(() -> new ResourceNotFoundException("Customer not found for this id :: " + customerId));
@@ -41,7 +43,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer deleteCustomer(Long customerId) throws ResourceNotFoundException {
+	public Customer deleteCustomer(Integer customerId) throws ResourceNotFoundException {
 		
 		 Customer customer = customerRepository.findById(customerId)
 		            						   .orElseThrow(() -> new ResourceNotFoundException("Customer not found for this id :: " + customerId));
